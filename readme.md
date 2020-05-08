@@ -44,20 +44,27 @@ Login: `root`
 Password: `root`
 port: `3306`
 
-If you want to export a db, just run the script in `/mysql_data/export.sh your_db_name`
-It will generate the `backup.sql` file in the same folder
+If you want to export a db, just run the script located in `/mysql_data/export.sh your_db_name`
+It will generate a `backup.sql` file in the same folder
 
 To make an import, make sure first you have the db created (running `/mysql_data/create.sh your_db_name`) and then execute the command`/mysql_data/import.sh your_db_name`
 
-Note: you must run this command as admin/sudo referring to your os
+If you want to replace some string in your sql file, like in wordpress to change the url (lol), you can run 
+```
+/mysql_data/str_replace what_to_change into_what wich_file
+```
+Example: 
+```
+/mysql_data/str_replace.sh local.app myapp.local local
+```
 
-If you want to replacxe some string in your sql file, like in wordpress to change the url, you can run `/mysql_data/str_replace what_to_change into_what wich_file`
-exemple: `/mysql_data/str_replace.sh local.app myapp.local local`. It will add the `.sql` extension into the script.
-This command run on OSX and maybe Lnux aswell, for windows, be sure to adapt the command `sed`, maybe you don't need the `LC_TYPE attribute...`
+It will add the `.sql` extension into the script.
+
+This command run on OSX and maybe Linux aswell. For windows, be sure to adapt the command `sed`, maybe you don't need the `LC_TYPE attribute...`, idk
 
 ### PhpMyAdmin
 
-You can access it at the address: `localhost:7000`. Feel free to change the port if needed in `docker-compose.yml`
+You can access it at: `localhost:7000`. Feel free to change the port if needed in `docker-compose.yml`
 
 ### Mailhog
 
