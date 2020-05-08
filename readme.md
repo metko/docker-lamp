@@ -55,7 +55,7 @@ If you want to replace some string in your sql file, like in wordpress to change
 ```
 Example: 
 ```
-/mysql_data/str_replace.sh local.app myapp.local local
+/mysql_data/str_replace.sh local.app myapp.local your_db_file_name
 ```
 
 It will add the `.sql` extension into the script.
