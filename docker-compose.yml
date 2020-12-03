@@ -1,40 +1,31 @@
 services:
-  web:
-    restart: always
-    ports:
-      - 80:80
-    build:
-      context: ./
-      dockerfile: ./dockerfiles/http
-    container_name: httpd
-    volumes:
-      - "./public:/usr/local/apache2/htdocs"
-
+  
   php:
-    container_name: php
+    container_name: php_docker
     restart: always
     build:
       context: ./
-      dockerfile: ./dockerfiles/php74
-      # dockerfile: ./dockerfiles/php72
+      dockerfile: ./dockerfiles/php
     volumes:
       - "./public:/var/www/html"
+    ports:
+      - 80:80
 
   mysql:
+    container_name: mysql_docker
     restart: always
     build:
       context: ./
       dockerfile: ./dockerfiles/mysql
-    container_name: mysql
     command: --default-authentication-plugin=mysql_native_password
     environment:
       - MYSQL_ROOT_PASSWORD=root
 
   phpmyadmin:
+    container_name: phpmyadmin_docker
     depends_on:
       - mysql
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
     restart: always
     environment:
       PMA_HOST: mysql
@@ -42,11 +33,11 @@ services:
     ports:
       - 7000:80
 
-  mailhog:
-    image: mailhog/mailhog
-    container_name: mailhog
-    ports:
-      - 1025:1025 # smtp server
-      - 8025:8025 # web ui
+  # mailhog:
+  #   container_name: mailhog_bc
+  #   image: mailhog/mailhog
+  #   ports:
+  #     - 1025:1025 # smtp server
+  #     - 8025:8025 # web ui
 
 version: '3'
